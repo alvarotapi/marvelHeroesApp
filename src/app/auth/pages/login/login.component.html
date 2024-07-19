@@ -1,0 +1,55 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="loginForm">
+  <p-panel header="Login Example">
+    <div>
+      <div>
+        <div>Login:</div>
+        <div>
+          <input pInputText type="text" formControlName="email" name="email" />
+        </div>
+        <div>
+          <div
+            [hidden]="
+              loginForm.controls['email'].valid ||
+              !loginForm.controls['email'].dirty
+            "
+          >
+            Email is required
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>Password:</div>
+        <div>
+          <input
+            pInputText
+            type="password"
+            formControlName="password"
+            name="password"
+          />
+        </div>
+        <div>
+          <div
+            [hidden]="
+              loginForm.controls['password'].valid ||
+              !loginForm.controls['password'].dirty
+            "
+          >
+            Password is required
+          </div>
+        </div>
+      </div>
+      <div>
+        <div></div>
+        <div>
+          <button
+            pButton
+            type="submit"
+            label="Submit"
+            [disabled]="!loginForm.valid"
+          ></button>
+        </div>
+        <div></div>
+      </div>
+    </div>
+  </p-panel>
+</form>
