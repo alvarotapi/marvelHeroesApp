@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MarvelService } from '../services/marvel.service';
 
 @Component({
   selector: 'app-marvel-list',
   standalone: true,
-  imports: [
-    CommonModule,
-  ],
+  imports: [CommonModule],
   template: `<p>marvel-list works!</p>`,
   styles: `
     :host {
@@ -15,4 +14,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MarvelListComponent { }
+export class MarvelListComponent {
+  constructor(private marvelService: MarvelService) {}
+}
