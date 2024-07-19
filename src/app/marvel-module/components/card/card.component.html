@@ -1,0 +1,23 @@
+<p-card
+  header="Advanced Card"
+  subheader="Card Subheader"
+  [style]="{ width: '360px' }"
+>
+  <ng-template pTemplate="header">
+    <img
+      alt="{{ hero().name }}"
+      src="{{ imgBuilder(hero().thumbnail.path, hero().thumbnail.extension) }}"
+    />
+  </ng-template>
+  <p>{{ hero().description }}</p>
+  <ng-template pTemplate="footer">
+    <div class="flex gap-3 mt-1">
+      <p-button
+        label="More details"
+        class="w-full"
+        styleClass="w-full"
+        (onClick)="moreDetails()"
+      />
+    </div>
+  </ng-template>
+</p-card>

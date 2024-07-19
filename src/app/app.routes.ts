@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './auth/pages/login/login.component';
 import { authGuard } from './auth/guards/auth.guard';
 import { LayoutComponent } from './shared/layout/layout.component';
-import { MarvelListComponent } from './pages/marvel-list/marvel-list.component';
+import { ListPageComponent } from './marvel-module/pages/list-page/list-page.component';
 
 export const routes: Routes = [
   {
@@ -21,7 +21,7 @@ export const routes: Routes = [
     children: [
       {
         path: 'marvel-list',
-        component: MarvelListComponent,
+        component: ListPageComponent,
         canActivate: [authGuard],
       },
     ],
