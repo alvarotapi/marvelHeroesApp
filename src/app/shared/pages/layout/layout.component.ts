@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { ToolBarComponent } from '../tool-bar/tool-bar.component';
+import { ToolBarComponent } from '../../components/tool-bar/tool-bar.component';
 
 @Component({
   selector: 'app-layout',

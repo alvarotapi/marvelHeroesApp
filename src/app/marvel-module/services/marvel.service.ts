@@ -20,18 +20,38 @@ export class MarvelService {
     offset: number
   ): Observable<MarvelApiResponse> {
     const ts = Date.now().toString();
-    const params = {
-      limit,
-      offset,
-      ts,
-      apikey: this.publicKey,
-      hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
-    };
 
-    let httpParams = new HttpParams({ fromObject: params });
+    let httpParams = new HttpParams({
+      fromObject: {
+        limit,
+        offset,
+        ts,
+        apikey: this.publicKey,
+        hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
+      },
+    });
 
     return this.http.get<MarvelApiResponse>(`${this.baseUrl}characters`, {
       params: httpParams,
     });
+  }
+
+  getCharacterById(characterId: string): Observable<MarvelApiResponse> {
+    const ts = Date.now().toString();
+
+    let httpParams = new HttpParams({
+      fromObject: {
+        ts,
+        apikey: this.publicKey,
+        hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
+      },
+    });
+
+    return this.http.get<MarvelApiResponse>(
+      `${this.baseUrl}characters/${characterId}`,
+      {
+        params: httpParams,
+      }
+    );
   }
 }

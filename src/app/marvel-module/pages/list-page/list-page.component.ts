@@ -6,12 +6,16 @@ import { CardComponent } from '../../components/card/card.component';
 import { Character } from '../../interfaces/character.interface';
 import { MarvelApiResponse } from '../../interfaces/marvel-api.interface';
 import { ButtonModule } from 'primeng/button';
+import { LoadingService } from '../../../shared/services/loading.service';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-list-page',
   standalone: true,
-  imports: [CommonModule, CardComponent, ButtonModule],
-  template: ` <p-button label="More..." (onClick)="this.nextPage()" />
+  imports: [CommonModule, CardComponent, LoadingComponent, ButtonModule],
+  template: ` <app-loading />
+
+    <p-button label="More..." (onClick)="this.nextPage()" />
 
     @for (character of characters(); track character.id) {
     <app-card [character]="character" />
@@ -29,13 +33,17 @@ export class ListPageComponent {
   currentPage: number = 0;
   pageSize: number = 10;
 
-  constructor(private marvelService: MarvelService) {}
+  constructor(
+    private marvelService: MarvelService,
+    private loadingService: LoadingService
+  ) {}
 
   ngOnInit() {
     this.loadCharacters();
   }
 
   loadCharacters(page: number = 0) {
+    this.loadingService.showSpinner();
     this.marvelService
       .getPaginatedCharacters(this.pageSize, page * this.pageSize)
       .subscribe({
@@ -48,8 +56,10 @@ export class ListPageComponent {
               return [...characters, result];
             });
           });
+          this.loadingService.hideSpinner();
         },
         error: (error) => {
+          this.loadingService.hideSpinner();
           throw new Error('Error fetching characters:', error);
         },
       });

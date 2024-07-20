@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { ToolbarModule } from 'primeng/toolbar';
 
-import { AuthService } from '../../auth/services/auth.service';
+import { AuthService } from '../../../auth/services/auth.service';
 import { ButtonModule } from 'primeng/button';
 
 @Component({

@@ -1,0 +1,20 @@
+<app-loading />
+
+@if (character) {
+<p-card>
+  <ng-template pTemplate="header">
+    <img
+      [src]="character.thumbnail.path + '.' + character.thumbnail.extension"
+      alt="{{ character.name }}"
+    />
+  </ng-template>
+  <ng-template pTemplate="title">
+    <h1>{{ character.name }}</h1>
+  </ng-template>
+  <ng-template pTemplate="content">
+    <p>{{ character.description }}</p>
+  </ng-template>
+</p-card>
+}
+
+<!-- TODO: Back to list button -->
