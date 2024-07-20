@@ -117,7 +117,8 @@ export class ListPageComponent {
   handlerScrolling(id: number) {
     if (
       this.characters().length < this.totalCharacters &&
-      this.characters().at(-2)?.id === id
+      this.characters().at(-2)?.id === id &&
+      this.searchQuery === ''
     ) {
       this.nextPage();
     }
