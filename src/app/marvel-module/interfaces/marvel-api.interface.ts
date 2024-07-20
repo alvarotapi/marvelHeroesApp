@@ -1,6 +1,7 @@
 import { Thumbnail } from './character.interface';
 
 export interface MarvelApiResponse {
+  code: number;
   data: {
     count: number;
     limit: number;

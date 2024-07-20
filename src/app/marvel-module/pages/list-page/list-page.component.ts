@@ -8,18 +8,13 @@ import { MarvelApiResponse } from '../../interfaces/marvel-api.interface';
 import { ButtonModule } from 'primeng/button';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-list-page',
   standalone: true,
   imports: [CommonModule, CardComponent, LoadingComponent, ButtonModule],
-  template: ` <app-loading />
-
-    <p-button label="More..." (onClick)="this.nextPage()" />
-
-    @for (character of characters(); track character.id) {
-    <app-card [character]="character" />
-    }`,
+  templateUrl: './list-page.component.html',
   styles: `
     :host {
       display: block;
@@ -28,10 +23,12 @@ import { LoadingComponent } from '../../../shared/components/loading/loading.com
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListPageComponent {
-  characters = signal<Character[]>([]);
-  totalCharacters: number = 0;
-  currentPage: number = 0;
-  pageSize: number = 10;
+  protected readonly characters = signal<Character[]>([]);
+  private totalCharacters: number = 0;
+  private currentPage: number = 0;
+  private pageSize: number = 20;
+
+  private getPaginatedCharactersSubscription?: Subscription;
 
   constructor(
     private marvelService: MarvelService,
@@ -42,9 +39,13 @@ export class ListPageComponent {
     this.loadCharacters();
   }
 
+  ngOnDestroy(): void {
+    this.getPaginatedCharactersSubscription?.unsubscribe();
+  }
+
   loadCharacters(page: number = 0) {
     this.loadingService.showSpinner();
-    this.marvelService
+    this.getPaginatedCharactersSubscription = this.marvelService
       .getPaginatedCharacters(this.pageSize, page * this.pageSize)
       .subscribe({
         next: (resp: MarvelApiResponse) => {
@@ -52,10 +53,11 @@ export class ListPageComponent {
           this.currentPage = page;
 
           resp.data.results.forEach((result) => {
-            this.characters.update((characters) => {
-              return [...characters, result];
+            this.characters.update((oldCharacters) => {
+              return [...oldCharacters, result];
             });
           });
+
           this.loadingService.hideSpinner();
         },
         error: (error) => {
@@ -68,6 +70,17 @@ export class ListPageComponent {
   nextPage() {
     if ((this.currentPage + 1) * this.pageSize < this.totalCharacters) {
       this.loadCharacters(this.currentPage + 1);
+    }
+  }
+
+  loaded(id: number) {
+    if (
+      this.characters().length < this.totalCharacters &&
+      this.characters().at(-2)?.id === id
+    ) {
+      // TODO: Remove commentaries
+      // this.loadCharacters(this.characters().length / this.pageSize);
+      this.nextPage();
     }
   }
 }

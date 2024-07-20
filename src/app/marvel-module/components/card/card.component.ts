@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   input,
+  output,
 } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -26,8 +26,13 @@ import { Character } from '../../interfaces/character.interface';
 })
 export class CardComponent {
   public character = input.required<Character>();
+  public characterId = output<number>();
 
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.characterId.emit(this.character().id);
+  }
 
   // TODO: Crear pipe para construir la imagen
   public imgBuilder(path: string, extension: string): string {

@@ -1,0 +1,10 @@
+<p-button label="More..." (onClick)="this.nextPage()" />
+
+@for (character of characters(); track character.id) { @defer (on viewport) {
+<app-card [character]="character" (characterId)="loaded($event)" />
+} @placeholder {
+<!-- TODO: Poner un mejor character--->
+<div>Loading...</div>
+} }
+
+<app-loading />

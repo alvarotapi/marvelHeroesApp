@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 import { Character } from '../../interfaces/character.interface';
 import { LoadingService } from '../../../shared/services/loading.service';
@@ -9,6 +9,7 @@ import { MarvelApiResponse } from '../../interfaces/marvel-api.interface';
 
 import { CardModule } from 'primeng/card';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-details-page',
@@ -22,6 +23,8 @@ export class DetailsPageComponent {
   character: Character | undefined = undefined;
   characterId: string | null = null;
 
+  private paramMapSubscription?: Subscription;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private marvelService: MarvelService,
@@ -29,12 +32,18 @@ export class DetailsPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap.subscribe((params) => {
-      this.characterId = params.get('id');
-      if (this.characterId) {
-        this.loadCharacterDetails(this.characterId);
+    this.paramMapSubscription = this.activatedRoute.paramMap.subscribe(
+      (params) => {
+        this.characterId = params.get('id');
+        if (this.characterId) {
+          this.loadCharacterDetails(this.characterId);
+        }
       }
-    });
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.paramMapSubscription?.unsubscribe();
   }
 
   loadCharacterDetails(id: string) {
