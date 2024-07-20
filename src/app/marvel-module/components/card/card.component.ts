@@ -9,7 +9,7 @@ import {
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 
-import { Hero } from '../../interfaces/hero.interface';
+import { Character } from '../../interfaces/character.interface';
 
 @Component({
   selector: 'app-card',
@@ -24,7 +24,7 @@ import { Hero } from '../../interfaces/hero.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
-  public hero = input.required<Hero>();
+  public character = input.required<Character>();
 
   // TODO: Crear pipe para construir la imagen
   public imgBuilder(path: string, extension: string): string {
