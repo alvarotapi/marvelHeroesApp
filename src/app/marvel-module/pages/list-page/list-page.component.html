@@ -1,4 +1,18 @@
-<p-button label="More..." (onClick)="this.nextPage()" />
+<div class="search-bar">
+  <input
+    pInputText
+    type="text"
+    placeholder="Search..."
+    [(ngModel)]="searchQuery"
+    (keyup.enter)="searchCharacters()"
+  />
+  <button
+    pButton
+    label="Buscar"
+    type="button"
+    (click)="searchCharacters()"
+  ></button>
+</div>
 
 @for (character of characters(); track character.id) { @defer (on viewport) {
 <app-card [character]="character" (characterId)="loaded($event)" />
@@ -8,3 +22,12 @@
 } }
 
 <app-loading />
+
+<!--TODO: Hacer que sea un componente independiente -->
+<p-button
+  type="button"
+  (click)="scrollToBottom()"
+  label="Scroll to Bottom"
+  icon="pi pi-arrow-down"
+  class="p-button-rounded p-button-primary"
+/>

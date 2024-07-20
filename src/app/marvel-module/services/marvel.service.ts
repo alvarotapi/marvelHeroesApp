@@ -54,4 +54,23 @@ export class MarvelService {
       }
     );
   }
+
+  getCharactersByNameStartsWith(
+    nameStartsWith: string
+  ): Observable<MarvelApiResponse> {
+    const ts = Date.now().toString();
+
+    let httpParams = new HttpParams({
+      fromObject: {
+        nameStartsWith,
+        ts,
+        apikey: this.publicKey,
+        hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
+      },
+    });
+
+    return this.http.get<MarvelApiResponse>(`${this.baseUrl}characters`, {
+      params: httpParams,
+    });
+  }
 }
