@@ -1,16 +1,29 @@
-<p-card header="{{ character().name }}" [style]="{ width: '360px' }">
+<p-card>
   <ng-template pTemplate="header">
-    <img
-      alt="{{ character().name }}"
-      src="{{
-        imgBuilder(character().thumbnail.path, character().thumbnail.extension)
-      }}"
-    />
-  </ng-template>
-  <p>{{ character().description }}</p>
-  <ng-template pTemplate="footer">
-    <div>
-      <p-button label="More details" (onClick)="moreDetails()" />
+    <div class="card-header">
+      <img
+        [src]="
+          imgBuilder(
+            character().thumbnail.path,
+            character().thumbnail.extension
+          )
+        "
+        alt="Card image"
+        class="card-image"
+      />
     </div>
+  </ng-template>
+
+  <ng-template pTemplate="title">
+    <div class="card-title">{{ character().name }}</div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+    <p-button
+      type="button"
+      label="Más información"
+      class="p-button-secondary"
+      (onClick)="moreDetails()"
+    />
   </ng-template>
 </p-card>

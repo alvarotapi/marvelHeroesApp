@@ -14,20 +14,22 @@
   ></button>
 </div>
 
-@for (character of characters(); track character.id) { @defer (on viewport) {
-<app-card [character]="character" (characterId)="loaded($event)" />
-} @placeholder {
-<!-- TODO: Poner un mejor character--->
-<div>Loading...</div>
-} }
+<div class="cards">
+  @for (character of characters(); track character.id) { @defer (on viewport) {
+  <div class="card">
+    <app-card
+      [character]="character"
+      (characterId)="handlerScrolling($event)"
+    />
+  </div>
+
+  } @placeholder {
+  <!-- TODO: Poner un mejor character--->
+  <div>Loading...</div>
+  } }
+</div>
 
 <app-loading />
 
 <!--TODO: Hacer que sea un componente independiente -->
-<p-button
-  type="button"
-  (click)="scrollToBottom()"
-  label="Scroll to Bottom"
-  icon="pi pi-arrow-down"
-  class="p-button-rounded p-button-primary"
-/>
+<app-scroll-button />

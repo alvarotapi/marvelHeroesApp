@@ -10,17 +10,7 @@ import { ButtonModule } from 'primeng/button';
   selector: 'app-tool-bar',
   standalone: true,
   imports: [CommonModule, ToolbarModule, ToolbarModule, ButtonModule],
-  template: `
-    <p-toolbar>
-      <div class="p-toolbar-group-end">
-        <p-button
-          label="Logout"
-          class="mr-2"
-          (click)="this.authService.logout()"
-        />
-      </div>
-    </p-toolbar>
-  `,
+  templateUrl: './tool-bar.component.html',
   styles: `
     :host {
       display: block;

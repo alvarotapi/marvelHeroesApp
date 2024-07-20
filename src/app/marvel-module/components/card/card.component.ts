@@ -17,11 +17,7 @@ import { Character } from '../../interfaces/character.interface';
   standalone: true,
   imports: [CommonModule, CardModule, ButtonModule],
   templateUrl: './card.component.html',
-  styles: `
-    :host {
-      display: block;
-    }
-  `,
+  styleUrl: './card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {
@@ -40,6 +36,7 @@ export class CardComponent {
   }
 
   moreDetails() {
+    console.log('entra');
     this.router.navigateByUrl(`/details/${this.character().id}`);
   }
 }
