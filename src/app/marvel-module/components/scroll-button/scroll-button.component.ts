@@ -10,7 +10,6 @@ import { ButtonModule } from 'primeng/button';
   template: `<p-button
     type="button"
     (click)="scrollToBottom()"
-    label="Scroll to Bottom"
     icon="pi pi-arrow-down"
     class="p-button-rounded p-button-primary"
   /> `,
