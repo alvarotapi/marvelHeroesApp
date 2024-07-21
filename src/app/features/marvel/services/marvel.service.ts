@@ -6,7 +6,7 @@ import {
   CharacterApiResponse,
   ComicApiResponse,
 } from '../interfaces/marvel-api.interface';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 
-import { Character } from '../../interfaces/character-comic.interface';
 import { BuildImagePipe } from '../../../shared/pipes/build-image.pipe';
+import { Character } from '../../../features/marvel/interfaces/character-comic.interface';
 
 @Component({
   selector: 'app-list-card',

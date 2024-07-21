@@ -2,7 +2,7 @@ import { Pipe, type PipeTransform } from '@angular/core';
 import {
   Character,
   Comic,
-} from '../../marvel-module/interfaces/character-comic.interface';
+} from '../../features/marvel/interfaces/character-comic.interface';
 
 @Pipe({
   name: 'buildImage',

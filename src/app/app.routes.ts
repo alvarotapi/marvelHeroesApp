@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 
-import { LoginComponent } from './auth/pages/login/login.component';
-import { authGuard } from './auth/guards/auth.guard';
+import { authGuard } from './core/guards/auth.guard';
 import { LayoutComponent } from './shared/pages/layout/layout.component';
-import { ListPageComponent } from './marvel-module/pages/list-page/list-page.component';
-import { DetailsPageComponent } from './marvel-module/pages/details-page/details-page.component';
-import { ComicPageComponent } from './marvel-module/pages/comic-page/comic-page.component';
+import { LoginComponent } from './features/auth/pages/login/login.component';
+import { ListPageComponent } from './features/marvel/pages/list-page/list-page.component';
+import { DetailsPageComponent } from './features/marvel/pages/details-page/details-page.component';
+import { ComicPageComponent } from './features/marvel/pages/comic-page/comic-page.component';
 
 export const routes: Routes = [
   {

@@ -5,16 +5,15 @@ import { Subscription } from 'rxjs';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 
-import { Character } from '../../interfaces/character-comic.interface';
-import { LoadingService } from '../../../shared/services/loading.service';
 import { MarvelService } from '../../services/marvel.service';
-import { CharacterApiResponse } from '../../interfaces/marvel-api.interface';
-import { LoadingComponent } from '../../../shared/components/loading/loading.component';
-import { BuildImagePipe } from '../../../shared/pipes/build-image.pipe';
-import { ComicUrltoLocalPipe } from '../../../shared/pipes/comic-url-to-local.pipe';
+import { ComicApiResponse } from '../../interfaces/marvel-api.interface';
+import { Comic } from '../../interfaces/character-comic.interface';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { BuildImagePipe } from '../../../../shared/pipes/build-image.pipe';
+import { LoadingService } from '../../../../shared/services/loading.service';
 
 @Component({
-  selector: 'app-details-page',
+  selector: 'app-comic-page',
   standalone: true,
   imports: [
     CommonModule,
@@ -22,18 +21,18 @@ import { ComicUrltoLocalPipe } from '../../../shared/pipes/comic-url-to-local.pi
     ButtonModule,
     LoadingComponent,
     BuildImagePipe,
-    ComicUrltoLocalPipe,
   ],
-  templateUrl: './details-page.component.html',
-  styleUrl: './details-page.component.css',
+  templateUrl: './comic-page.component.html',
+  styleUrl: './comic-page.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DetailsPageComponent {
-  character?: Character;
+export class ComicPageComponent {
+  comic?: Comic;
+  comicId!: string;
   characterId!: string;
 
   private paramMapSubscription?: Subscription;
-  private getCharacterByIdSubscription?: Subscription;
+  private getComicByIdSubscription?: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -45,9 +44,11 @@ export class DetailsPageComponent {
   ngOnInit(): void {
     this.paramMapSubscription = this.activatedRoute.paramMap.subscribe(
       (params) => {
-        this.characterId = params.get('id')!;
-        if (this.characterId) {
-          this.loadCharacterDetails(this.characterId);
+        this.characterId = params.get('characterId')!;
+        this.comicId = params.get('comicId')!;
+
+        if (this.comicId) {
+          this.loadComic(this.comicId);
         }
       }
     );
@@ -55,18 +56,17 @@ export class DetailsPageComponent {
 
   ngOnDestroy(): void {
     this.paramMapSubscription?.unsubscribe();
-    this.getCharacterByIdSubscription?.unsubscribe();
+    this.getComicByIdSubscription?.unsubscribe();
   }
 
-  loadCharacterDetails(id: string) {
+  loadComic(id: string) {
     this.loadingService.showSpinner();
 
-    this.getCharacterByIdSubscription = this.marvelService
-      .getCharacterById(id)
+    this.getComicByIdSubscription = this.marvelService
+      .getComicById(id)
       .subscribe({
-        next: (resp: CharacterApiResponse) => {
-          this.character = resp.data.results[0];
-
+        next: (resp: ComicApiResponse) => {
+          this.comic = resp.data.results[0];
           this.loadingService.hideSpinner();
         },
         error: (error) => {
@@ -76,7 +76,7 @@ export class DetailsPageComponent {
       });
   }
 
-  navigateTo(url: string) {
-    this.router.navigate([url]);
+  navigateToCharacter(id: number | string) {
+    this.router.navigate(['/details', id]);
   }
 }

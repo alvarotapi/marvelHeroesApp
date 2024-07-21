@@ -6,12 +6,12 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { MarvelService } from '../../services/marvel.service';
-import { CardComponent } from '../../components/list-card/list-card.component';
 import { Character } from '../../interfaces/character-comic.interface';
 import { CharacterApiResponse } from '../../interfaces/marvel-api.interface';
-import { LoadingService } from '../../../shared/services/loading.service';
-import { LoadingComponent } from '../../../shared/components/loading/loading.component';
-import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
+import { CardComponent } from '../../../../shared/components/list-card/list-card.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { ScrollButtonComponent } from '../../../../shared/components/scroll-button/scroll-button.component';
+import { LoadingService } from '../../../../shared/services/loading.service';
 
 @Component({
   selector: 'app-list-page',

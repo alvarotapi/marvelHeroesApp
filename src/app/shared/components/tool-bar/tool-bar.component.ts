@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ToolbarModule } from 'primeng/toolbar';
-
-import { AuthService } from '../../../auth/services/auth.service';
 import { ButtonModule } from 'primeng/button';
+
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 @Component({
   selector: 'app-tool-bar',
