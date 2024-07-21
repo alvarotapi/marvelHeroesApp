@@ -1,4 +1,4 @@
-import { Thumbnail } from './character.interface';
+import { Comics, Thumbnail } from './character.interface';
 
 export interface MarvelApiResponse {
   code: number;
@@ -12,7 +12,7 @@ export interface MarvelApiResponse {
 }
 
 export interface MarvelApiResult {
-  comics: {};
+  comics: Comics;
   description: string;
   events: {};
   id: number;

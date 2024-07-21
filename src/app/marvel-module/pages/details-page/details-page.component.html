@@ -2,16 +2,32 @@
 
 @if (character) {
 <p-card>
-  <ng-template pTemplate="header">
-    <img [src]="character | characterImage" alt="{{ character.name }}" />
-  </ng-template>
-  <ng-template pTemplate="title">
-    <h1>{{ character.name }}</h1>
-  </ng-template>
-  <ng-template pTemplate="content">
-    <p>{{ character.description }}</p>
-  </ng-template>
+  <div class="character-container">
+    <div class="character-image">
+      <img [src]="character | characterImage" alt="{{ character.name }}" />
+    </div>
+    <div class="character-info">
+      <h2>{{ character.name }}</h2>
+      <p><strong>ID:</strong> {{ character.id }}</p>
+      <p><strong>Description:</strong> {{ character.description }}</p>
+      <h3>Aquí tienes 3 comics donde aparece:</h3>
+      <ul>
+        @for (comic of character.comics.items; track $index) { @if ($index < 3)
+        {
+        <li>
+          <a [href]="comic.resourceURI | comicUrlToLocal">{{ comic.name }}</a>
+        </li>
+        } }
+      </ul>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <p-button
+      label="Volver"
+      icon="pi pi-arrow-left"
+      (onClick)="navigateTo('/marvel-list')"
+    ></p-button>
+  </div>
 </p-card>
 }
-
-<!-- TODO: Back to list button -->

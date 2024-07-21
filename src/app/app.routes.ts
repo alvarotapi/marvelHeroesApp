@@ -5,6 +5,7 @@ import { authGuard } from './auth/guards/auth.guard';
 import { LayoutComponent } from './shared/pages/layout/layout.component';
 import { ListPageComponent } from './marvel-module/pages/list-page/list-page.component';
 import { DetailsPageComponent } from './marvel-module/pages/details-page/details-page.component';
+import { ComicPageComponent } from './marvel-module/pages/comic-page/comic-page.component';
 
 export const routes: Routes = [
   {
@@ -28,6 +29,11 @@ export const routes: Routes = [
       {
         path: 'details/:id',
         component: DetailsPageComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'comic/:id',
+        component: ComicPageComponent,
         canActivate: [authGuard],
       },
     ],
