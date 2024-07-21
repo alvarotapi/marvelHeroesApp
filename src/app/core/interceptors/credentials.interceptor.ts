@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { Md5 } from 'ts-md5';
-import { environment } from '../../../environments/environment.development';
+import { environment } from '../../../environments/environment';
 
 interface CredentialsParams {
   ts: string;
