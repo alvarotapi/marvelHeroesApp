@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Md5 } from 'ts-md5';
 import { environment } from '../../../environments/environment.development';
 import {
   CharacterApiResponse,
@@ -13,8 +12,6 @@ import { Observable } from 'rxjs';
 })
 export class MarvelService {
   private baseUrl: string = environment.baseUrl;
-  private publicKey: string = environment.publicKey;
-  private privateKey: string = environment.privateKey;
 
   constructor(private http: HttpClient) {}
 
@@ -22,15 +19,10 @@ export class MarvelService {
     limit: number,
     offset: number
   ): Observable<CharacterApiResponse> {
-    const ts = Date.now().toString();
-
     let httpParams = new HttpParams({
       fromObject: {
         limit,
         offset,
-        ts,
-        apikey: this.publicKey,
-        hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
       },
     });
 
@@ -40,35 +32,17 @@ export class MarvelService {
   }
 
   getCharacterById(characterId: string): Observable<CharacterApiResponse> {
-    const ts = Date.now().toString();
-
-    let httpParams = new HttpParams({
-      fromObject: {
-        ts,
-        apikey: this.publicKey,
-        hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
-      },
-    });
-
     return this.http.get<CharacterApiResponse>(
-      `${this.baseUrl}characters/${characterId}`,
-      {
-        params: httpParams,
-      }
+      `${this.baseUrl}characters/${characterId}`
     );
   }
 
   getCharactersByNameStartsWith(
     nameStartsWith: string
   ): Observable<CharacterApiResponse> {
-    const ts = Date.now().toString();
-
     let httpParams = new HttpParams({
       fromObject: {
         nameStartsWith,
-        ts,
-        apikey: this.publicKey,
-        hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
       },
     });
 
@@ -78,18 +52,6 @@ export class MarvelService {
   }
 
   getComicById(comicId: string): Observable<ComicApiResponse> {
-    const ts = Date.now().toString();
-
-    let httpParams = new HttpParams({
-      fromObject: {
-        ts,
-        apikey: this.publicKey,
-        hash: Md5.hashStr(ts + this.privateKey + this.publicKey),
-      },
-    });
-
-    return this.http.get<ComicApiResponse>(`${this.baseUrl}comics/${comicId}`, {
-      params: httpParams,
-    });
+    return this.http.get<ComicApiResponse>(`${this.baseUrl}comics/${comicId}`);
   }
 }
