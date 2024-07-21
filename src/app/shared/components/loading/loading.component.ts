@@ -11,7 +11,7 @@ import { LoadingService } from '../../services/loading.service';
   imports: [CommonModule, ProgressBarModule],
   template: `
     @if (loadingService.loading$ | async) {
-    <p-progressBar mode="indeterminate" [style]="{ height: '6px' }" />
+    <p-progressBar mode="indeterminate" [style]="{ height: '25px' }" />
     }
   `,
   styles: `

@@ -9,12 +9,11 @@ import {
 import { AuthService } from '../../services/auth.service';
 
 import { ButtonModule } from 'primeng/button';
-import { PanelModule } from 'primeng/panel';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule, PanelModule],
+  imports: [CommonModule, ReactiveFormsModule, ButtonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -31,7 +30,7 @@ export class LoginComponent {
     });
   }
 
-  onSubmit() {
+  onLogin() {
     this.authService.login(
       this.loginForm.controls['email'].value,
       this.loginForm.controls['password'].value
