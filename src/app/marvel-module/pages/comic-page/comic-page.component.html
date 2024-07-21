@@ -1,0 +1,25 @@
+<app-loading />
+
+@if (comic) {
+<p-card>
+  <div class="comic-container">
+    <div class="comic-image">
+      <img [src]="comic | buildImage" alt="{{ comic.title }}" />
+    </div>
+    <div class="comic-info">
+      <h2>{{ comic.title }}</h2>
+      <p><strong>ID:</strong> {{ comic.id }}</p>
+      <p><strong>Número de entrega:</strong> {{ comic.issueNumber }}</p>
+      <p><strong>Description:</strong> {{ comic.description }}</p>
+    </div>
+  </div>
+
+  <div class="button-container">
+    <p-button
+      label="Volver"
+      icon="pi pi-arrow-left"
+      (onClick)="navigateToCharacter(characterId)"
+    ></p-button>
+  </div>
+</p-card>
+}

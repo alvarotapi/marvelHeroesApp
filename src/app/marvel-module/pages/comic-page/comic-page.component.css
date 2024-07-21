@@ -1,0 +1,51 @@
+.comic-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.comic-image img {
+  width: 200px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.comic-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.comic-info h2 {
+  margin-top: 0;
+}
+
+.comic-info p {
+  margin: 0.5rem 0;
+}
+
+.comic-info ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comic-info ul li {
+  margin: 0.5rem 0;
+}
+
+.comic-info ul li a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.comic-info ul li a:hover {
+  text-decoration: underline;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}

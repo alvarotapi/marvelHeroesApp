@@ -10,13 +10,13 @@ import { Router } from '@angular/router';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 
-import { Character } from '../../interfaces/character.interface';
-import { CharacterImagePipe } from '../../../shared/pipes/character-image.pipe';
+import { Character } from '../../interfaces/character-comic.interface';
+import { BuildImagePipe } from '../../../shared/pipes/build-image.pipe';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, CardModule, ButtonModule, CharacterImagePipe],
+  imports: [CommonModule, CardModule, ButtonModule, BuildImagePipe],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -32,7 +32,7 @@ export const routes: Routes = [
         canActivate: [authGuard],
       },
       {
-        path: 'comic/:id',
+        path: 'comic/:comicId/character/:characterId',
         component: ComicPageComponent,
         canActivate: [authGuard],
       },

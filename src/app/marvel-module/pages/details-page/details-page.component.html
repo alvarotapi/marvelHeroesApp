@@ -4,7 +4,7 @@
 <p-card>
   <div class="character-container">
     <div class="character-image">
-      <img [src]="character | characterImage" alt="{{ character.name }}" />
+      <img [src]="character | buildImage" alt="{{ character.name }}" />
     </div>
     <div class="character-info">
       <h2>{{ character.name }}</h2>
@@ -15,7 +15,9 @@
         @for (comic of character.comics.items; track $index) { @if ($index < 3)
         {
         <li>
-          <a [href]="comic.resourceURI | comicUrlToLocal">{{ comic.name }}</a>
+          <a [href]="comic.resourceURI | comicUrlToLocal : character.id">{{
+            comic.name
+          }}</a>
         </li>
         } }
       </ul>

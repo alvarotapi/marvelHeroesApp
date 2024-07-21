@@ -5,9 +5,11 @@ import { Pipe, type PipeTransform } from '@angular/core';
   standalone: true,
 })
 export class ComicUrltoLocalPipe implements PipeTransform {
-  transform(url: string): string {
-    const parts = url.split('/');
+  transform(resourceURI: string, characterId: string | number): string {
+    const resourceUriParts = resourceURI.split('/');
 
-    return `/comic/${parts[parts.length - 1]}`;
+    return `/comic/${
+      resourceUriParts[resourceUriParts.length - 1]
+    }/character/${characterId}`;
   }
 }

@@ -1,17 +1,17 @@
-import { Comics, Thumbnail } from './character.interface';
+import { Comics, TextObject, Thumbnail } from './character-comic.interface';
 
-export interface MarvelApiResponse {
+export interface CharacterApiResponse {
   code: number;
   data: {
     count: number;
     limit: number;
     offset: number;
     total: number;
-    results: MarvelApiResult[];
+    results: CharacterApiResult[];
   };
 }
 
-export interface MarvelApiResult {
+export interface CharacterApiResult {
   comics: Comics;
   description: string;
   events: {};
@@ -23,4 +23,34 @@ export interface MarvelApiResult {
   stories: {};
   thumbnail: Thumbnail;
   urls: {}[];
+}
+
+export interface ComicApiResponse {
+  code: number;
+  data: {
+    count: number;
+    limit: number;
+    offset: number;
+    total: number;
+    results: ComicApiResult[];
+  };
+}
+
+export interface ComicApiResult {
+  id: number;
+  digitalId: number;
+  title: string;
+  issueNumber: number;
+  variantDescription: string;
+  description: string;
+  modified: string;
+  isbn: string;
+  upc: string;
+  diamondCode: string;
+  ean: string;
+  issn: string;
+  format: string;
+  pageCount: number;
+  textObjects: TextObject[];
+  thumbnail: Thumbnail;
 }

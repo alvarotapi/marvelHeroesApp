@@ -8,8 +8,8 @@ import { InputTextModule } from 'primeng/inputtext';
 
 import { MarvelService } from '../../services/marvel.service';
 import { CardComponent } from '../../components/card/card.component';
-import { Character } from '../../interfaces/character.interface';
-import { MarvelApiResponse } from '../../interfaces/marvel-api.interface';
+import { Character } from '../../interfaces/character-comic.interface';
+import { CharacterApiResponse } from '../../interfaces/marvel-api.interface';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { ScrollButtonComponent } from '../../components/scroll-button/scroll-button.component';
@@ -60,7 +60,7 @@ export class ListPageComponent {
     this.getPaginatedCharactersSubscription = this.marvelService
       .getPaginatedCharacters(this.pageSize, page * this.pageSize)
       .subscribe({
-        next: (resp: MarvelApiResponse) => {
+        next: (resp: CharacterApiResponse) => {
           this.totalCharacters = resp.data.total;
           this.currentPage = page;
 
@@ -98,7 +98,7 @@ export class ListPageComponent {
     this.getCharactersByNameStartsWithSubscription = this.marvelService
       .getCharactersByNameStartsWith(this.searchQuery)
       .subscribe({
-        next: (resp: MarvelApiResponse) => {
+        next: (resp: CharacterApiResponse) => {
           resp.data.results.forEach((result) => {
             this.characters.update((oldCharacters) => {
               return [...oldCharacters, result];
