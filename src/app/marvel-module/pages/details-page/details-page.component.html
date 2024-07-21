@@ -11,7 +11,7 @@
       <h2>{{ character.name }}</h2>
       <p><strong>ID:</strong> {{ character.id }}</p>
       <p><strong>Description:</strong> {{ character.description }}</p>
-      <h3>Aquí tienes 3 comics donde aparece:</h3>
+      <h3>Aquí tienes tres comics donde aparece:</h3>
       <ul>
         @for (comic of character.comics.items; track $index) { @if ($index < 3)
         {
@@ -20,7 +20,11 @@
             comic.name
           }}</a>
         </li>
-        } }
+        } } @if (character.comics.items.length === 0) {
+        <li>
+          <p>No hay comics que mostrar de este personaje, prueba con otro!</p>
+        </li>
+        }
       </ul>
     </div>
   </div>
