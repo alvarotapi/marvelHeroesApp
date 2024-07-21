@@ -86,11 +86,11 @@ export class ListPageComponent {
   }
 
   searchCharacters(): void {
-    // * Limpiamos la lista para ejecutar una búsqueda limpia
+    // * We clear the subscription and the characters signal to perform a clean search
     this.getPaginatedCharactersSubscription?.unsubscribe();
     this.characters.set([]);
 
-    // * Si el parámetro de búsqueda está vacío, volvemos a cargar la lista
+    // * If the search parameter is empty, we reload the list as it was at the start of the application
     if (this.searchQuery === '') {
       this.loadPaginatedCharacters();
       return;
