@@ -11,11 +11,12 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 
 import { Character } from '../../interfaces/character.interface';
+import { CharacterImagePipe } from '../../../shared/pipes/character-image.pipe';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [CommonModule, CardModule, ButtonModule],
+  imports: [CommonModule, CardModule, ButtonModule, CharacterImagePipe],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,13 +31,7 @@ export class CardComponent {
     this.characterId.emit(this.character().id);
   }
 
-  // TODO: Crear pipe para construir la imagen
-  public imgBuilder(path: string, extension: string): string {
-    return `${path}.${extension}`;
-  }
-
   moreDetails() {
-    console.log('entra');
     this.router.navigateByUrl(`/details/${this.character().id}`);
   }
 }

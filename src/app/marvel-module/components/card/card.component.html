@@ -2,12 +2,7 @@
   <ng-template pTemplate="header">
     <div class="card-header">
       <img
-        [src]="
-          imgBuilder(
-            character().thumbnail.path,
-            character().thumbnail.extension
-          )
-        "
+        [src]="character() | characterImage"
         alt="Card image"
         class="card-image"
       />

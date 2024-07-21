@@ -3,10 +3,7 @@
 @if (character) {
 <p-card>
   <ng-template pTemplate="header">
-    <img
-      [src]="character.thumbnail.path + '.' + character.thumbnail.extension"
-      alt="{{ character.name }}"
-    />
+    <img [src]="character | characterImage" alt="{{ character.name }}" />
   </ng-template>
   <ng-template pTemplate="title">
     <h1>{{ character.name }}</h1>
