@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { FormsModule } from '@angular/forms';
-
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { MarvelService } from '../../services/marvel.service';
-import { CardComponent } from '../../components/card/card.component';
+import { CardComponent } from '../../components/list-card/list-card.component';
 import { Character } from '../../interfaces/character-comic.interface';
 import { CharacterApiResponse } from '../../interfaces/marvel-api.interface';
 import { LoadingService } from '../../../shared/services/loading.service';
@@ -57,6 +56,7 @@ export class ListPageComponent {
 
   loadPaginatedCharacters(page: number = 0) {
     this.loadingService.showSpinner();
+
     this.getPaginatedCharactersSubscription = this.marvelService
       .getPaginatedCharacters(this.pageSize, page * this.pageSize)
       .subscribe({
@@ -86,15 +86,18 @@ export class ListPageComponent {
   }
 
   searchCharacters(): void {
+    // * Limpiamos la lista para ejecutar una búsqueda limpia
     this.getPaginatedCharactersSubscription?.unsubscribe();
     this.characters.set([]);
 
+    // * Si el parámetro de búsqueda está vacío, volvemos a cargar la lista
     if (this.searchQuery === '') {
       this.loadPaginatedCharacters();
       return;
     }
 
     this.loadingService.showSpinner();
+
     this.getCharactersByNameStartsWithSubscription = this.marvelService
       .getCharactersByNameStartsWith(this.searchQuery)
       .subscribe({

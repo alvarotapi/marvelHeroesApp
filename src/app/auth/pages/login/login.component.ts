@@ -6,9 +6,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-
 import { ButtonModule } from 'primeng/button';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',

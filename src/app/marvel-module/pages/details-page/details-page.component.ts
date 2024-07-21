@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
 
 import { Character } from '../../interfaces/character-comic.interface';
 import { LoadingService } from '../../../shared/services/loading.service';
 import { MarvelService } from '../../services/marvel.service';
 import { CharacterApiResponse } from '../../interfaces/marvel-api.interface';
-
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
-
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
-import { Subscription } from 'rxjs';
 import { BuildImagePipe } from '../../../shared/pipes/build-image.pipe';
 import { ComicUrltoLocalPipe } from '../../../shared/pipes/comic-url-to-local.pipe';
 
@@ -31,10 +29,11 @@ import { ComicUrltoLocalPipe } from '../../../shared/pipes/comic-url-to-local.pi
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailsPageComponent {
-  character: Character | undefined = undefined;
-  characterId: string | null = null;
+  character?: Character;
+  characterId!: string;
 
   private paramMapSubscription?: Subscription;
+  private getCharacterByIdSubscription?: Subscription;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -46,7 +45,7 @@ export class DetailsPageComponent {
   ngOnInit(): void {
     this.paramMapSubscription = this.activatedRoute.paramMap.subscribe(
       (params) => {
-        this.characterId = params.get('id');
+        this.characterId = params.get('id')!;
         if (this.characterId) {
           this.loadCharacterDetails(this.characterId);
         }
@@ -56,22 +55,25 @@ export class DetailsPageComponent {
 
   ngOnDestroy(): void {
     this.paramMapSubscription?.unsubscribe();
+    this.getCharacterByIdSubscription?.unsubscribe();
   }
 
   loadCharacterDetails(id: string) {
     this.loadingService.showSpinner();
 
-    this.marvelService.getCharacterById(id).subscribe({
-      next: (resp: CharacterApiResponse) => {
-        this.character = resp.data.results[0];
+    this.getCharacterByIdSubscription = this.marvelService
+      .getCharacterById(id)
+      .subscribe({
+        next: (resp: CharacterApiResponse) => {
+          this.character = resp.data.results[0];
 
-        this.loadingService.hideSpinner();
-      },
-      error: (error) => {
-        this.loadingService.hideSpinner();
-        throw new Error('Error fetching characters:', error);
-      },
-    });
+          this.loadingService.hideSpinner();
+        },
+        error: (error) => {
+          this.loadingService.hideSpinner();
+          throw new Error('Error fetching characters:', error);
+        },
+      });
   }
 
   navigateTo(url: string) {

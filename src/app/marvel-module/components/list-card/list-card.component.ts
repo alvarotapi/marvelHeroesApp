@@ -6,7 +6,6 @@ import {
   output,
 } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 
@@ -14,11 +13,11 @@ import { Character } from '../../interfaces/character-comic.interface';
 import { BuildImagePipe } from '../../../shared/pipes/build-image.pipe';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-list-card',
   standalone: true,
   imports: [CommonModule, CardModule, ButtonModule, BuildImagePipe],
-  templateUrl: './card.component.html',
-  styleUrl: './card.component.css',
+  templateUrl: './list-card.component.html',
+  styleUrl: './list-card.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CardComponent {

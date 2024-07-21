@@ -12,9 +12,6 @@ export interface Thumbnail {
 }
 
 export interface Comics {
-  // TODO: Borrar available y collectionURI, si no lo llego a utilizar
-  available: number;
-  collectionURI: string;
   items: ComicItems[];
 }
 

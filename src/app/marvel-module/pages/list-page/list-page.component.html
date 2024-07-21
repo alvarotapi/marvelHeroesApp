@@ -6,30 +6,27 @@
     [(ngModel)]="searchQuery"
     (keyup.enter)="searchCharacters()"
   />
-  <button
-    pButton
+  <p-button
     label="Buscar"
     type="button"
     (click)="searchCharacters()"
-  ></button>
+  ></p-button>
 </div>
 
 <div class="cards">
   @for (character of characters(); track character.id) { @defer (on viewport) {
   <div class="card">
-    <app-card
+    <app-list-card
       [character]="character"
       (characterId)="handlerScrolling($event)"
     />
   </div>
 
   } @placeholder {
-  <!-- TODO: Poner un mejor character--->
-  <div>Loading...</div>
+  <span></span>
   } }
 </div>
 
 <app-loading />
 
-<!--TODO: Hacer que sea un componente independiente -->
 <app-scroll-button />

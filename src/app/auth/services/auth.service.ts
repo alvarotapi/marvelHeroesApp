@@ -10,6 +10,12 @@ const userData: User[] = [
     email: 'test@test.com',
     password: '123456',
   },
+  {
+    id: 2,
+    username: 'testuser',
+    email: 'testuser@google.com',
+    password: 'testuser',
+  },
 ];
 
 @Injectable({
