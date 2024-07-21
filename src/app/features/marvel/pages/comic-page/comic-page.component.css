@@ -49,3 +49,25 @@
   justify-content: flex-end;
   padding-top: 1rem;
 }
+
+@media (max-width: 768px) {
+  .comic-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .comic-image img {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .comic-info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .button-container {
+    justify-content: center;
+  }
+}
