@@ -10,8 +10,6 @@ import {
 })
 export class BuildImagePipe implements PipeTransform {
   transform(character: Character | Comic): string {
-    if (!character.id) return 'assets/no-image.png';
-
     return `${character.thumbnail.path}.${character.thumbnail.extension}`;
   }
 }

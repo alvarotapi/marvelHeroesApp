@@ -2,32 +2,19 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../interfaces/user.interface';
-
-const userData: User[] = [
-  {
-    id: 1,
-    username: 'test',
-    email: 'test@test.com',
-    password: '123456',
-  },
-  {
-    id: 2,
-    username: 'testuser',
-    email: 'testuser@google.com',
-    password: 'testuser',
-  },
-];
+import { userData } from '../../../assets/data/user-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private user?: User;
+  private registeredUsers: User[] = userData;
 
   constructor(private router: Router) {}
 
   login(email: string, password: string) {
-    userData.forEach((user) => {
+    this.registeredUsers.forEach((user) => {
       if (user.email === email && user.password === password) {
         this.user = user;
         localStorage.setItem('token', `${this.user?.username}-asd24236fsdf`);
